@@ -40,6 +40,7 @@ public class GeminiService {
                 
                 ---
                 convert a message to markdown format.
+                do not forget to make text look informative
                 """;
         String googleGeminiResponseBody = new GoogleGeminiRequest(endpoint, prompt, gson)
                 .execute()
