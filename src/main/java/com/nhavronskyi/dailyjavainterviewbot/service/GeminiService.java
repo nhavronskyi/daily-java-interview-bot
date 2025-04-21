@@ -8,8 +8,10 @@ import com.nhavronskyi.dailyjavainterviewbot.props.GoogleProps;
 import com.nhavronskyi.dailyjavainterviewbot.service.model.GoogleGeminiRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GeminiService {
@@ -24,6 +26,8 @@ public class GeminiService {
         JsonObject content = firstCandidate.getAsJsonObject("content");
         JsonArray parts = content.getAsJsonArray("parts");
         JsonObject firstPart = parts.get(0).getAsJsonObject();
+
+        log.info("The answer is Parsed from Json");
         return firstPart.get("text").getAsString();
     }
 
@@ -40,7 +44,6 @@ public class GeminiService {
         String googleGeminiResponseBody = new GoogleGeminiRequest(endpoint, prompt, gson)
                 .execute()
                 .body();
-
         return getAnswerFromJson(googleGeminiResponseBody);
     }
 }

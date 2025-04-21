@@ -2,6 +2,7 @@ package com.nhavronskyi.dailyjavainterviewbot.service.model;
 
 import com.google.gson.Gson;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Getter
 public class GoogleGeminiRequest {
 
@@ -33,9 +35,16 @@ public class GoogleGeminiRequest {
                 .build();
     }
 
-    public HttpResponse<String> execute() throws IOException, InterruptedException {
-        return HttpClient.newHttpClient()
-                .send(request, HttpResponse.BodyHandlers.ofString());
+    public HttpResponse<String> execute() {
+        HttpResponse<String> send;
+        try {
+            send = HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("Google Gemini request executed");
+        return send;
     }
 
     private String getRequestBody(String promptText) {

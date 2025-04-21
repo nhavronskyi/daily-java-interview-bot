@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 
 import java.util.function.Supplier;
 
@@ -20,8 +19,9 @@ public class DailyJavaInterviewBotApplication {
     private final GeminiService geminiService;
 
     @Bean
-    public Supplier<HttpStatus> sendQuestions() {
-        return () -> telegramBotService.sendMsg(geminiService.getQuestionsForToday());
+    public Supplier<String> sendQuestions() {
+        var status = telegramBotService.sendMsg(geminiService.getQuestionsForToday());
+        return status::toString;
     }
 
     public static void main(String[] args) {
