@@ -1,0 +1,4 @@
+telegram:
+  bot:
+    token: "test-token"
+    chatId: 123456789

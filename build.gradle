@@ -10,11 +10,11 @@ ext {
 }
 
 group = 'com.nhavronskyi'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -30,7 +30,7 @@ repositories {
 
 dependencies {
     {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter'
 
         implementation "org.springframework.cloud:spring-cloud-function-adapter-aws:$springCloudAwsFunctionVersion"
         implementation "com.github.pengrad:java-telegram-bot-api:$telegramBotVersion"
@@ -43,6 +43,18 @@ dependencies {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
+}
+
+tasks.register('buildZip', Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtimeClasspath
+    }
+}
+
+build {
+    finalizedBy tasks.buildZip
 }
 
 tasks.named('test') {
