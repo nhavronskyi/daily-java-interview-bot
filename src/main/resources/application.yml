@@ -8,9 +8,7 @@ telegram:
     chatId: ${TELEGRAM_BOT_CHAT_ID:${secrets.TELEGRAM_BOT_CHAT_ID}}
 google:
   api-key: ${GOOGLE_API_KEY:${secrets.GOOGLE_API_KEY}}
-  refresh_token: ${GOOGLE_REFRESH_TOKEN:${secrets.GOOGLE_REFRESH_TOKEN}}
   url:
-    redirect_url: "http://localhost:8080/oauth2/callback"
     gemini_url: "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-001:generateContent?key="
 
 
