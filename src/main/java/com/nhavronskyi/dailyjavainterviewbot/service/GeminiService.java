@@ -38,6 +38,12 @@ public class GeminiService {
         String prompt = """
                 Please send me 5 random questions for middle java developer interview.
                 
+                then create separation line
+                
+                write answers to these questions in format 
+                Q1. <question>
+                ANS. <answer>
+                
                 ---
                 convert a message to markdown format.
                 do not forget to make text look informative
