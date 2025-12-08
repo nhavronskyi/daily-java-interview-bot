@@ -6,7 +6,7 @@ plugins {
 
 ext {
     telegramBotVersion = '9.2.0'
-    springCloudAwsFunctionVersion = '4.2.2'
+    springCloudAwsFunctionVersion = '5.0.0'
 }
 
 group = 'com.nhavronskyi'
